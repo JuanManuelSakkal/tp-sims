@@ -9,7 +9,6 @@ class Sim {
     var nivelDeFelicidad 
     var amigos = []
     var circuloDeAmigos = #{}
-    var popularidad = 0
     var personalidad
     var dinero = 0
     var estadoDeAnimo = normal
@@ -20,133 +19,123 @@ class Sim {
     var relacionActual
     var relaciones = []
     
-    constructor(unSexo,unaEdad,unaFelicidad,unaPersonalidad,unSexoDePreferencia){
-    	sexo=unSexo
-    	edad=unaEdad
-    	nivelDeFelicidad=unaFelicidad
-    	personalidad=unaPersonalidad
-    	sexoDePreferencia=unSexoDePreferencia
-    	
+    constructor(unSexo, unaEdad, unaFelicidad, unaPersonalidad, unSexoDePreferencia) {
+    	sexo = unSexo
+    	edad = unaEdad
+    	nivelDeFelicidad = unaFelicidad
+    	personalidad = unaPersonalidad
+    	sexoDePreferencia = unSexoDePreferencia
     }
     
-    method darFelicidad(cuataFelicidad){
-    	nivelDeFelicidad += cuataFelicidad
+    method ganarFelicidad(cuantaFelicidad) {
+    	nivelDeFelicidad += cuantaFelicidad
     }
     
-	method hacerseAmigoDe(amigo){
+	method hacerseAmigoDe(amigo) {
         amigos.add(amigo)
         circuloDeAmigos.add(amigo)
         nivelDeFelicidad += self.valoracion(amigo)
     }
-   
-	 method calcularPopularidad(){
-        popularidad = amigos.map({amigo => amigo.nivelDeFelicidad()}).sum()
-    }
     
-    
-    method nivelDeFelicidad(){
+    method nivelDeFelicidad() {
         return nivelDeFelicidad
     }
     
-    method dinero(){
+    method dinero() {
         return dinero
     }
     
-    method conocimientos(){
+    method conocimientos() {
     	return conocimientos
     }
     
-    method esAmigoDe(unSim){
+    method esAmigoDe(unSim) {
     	return unSim.amigos().contains(self)
     }
     
-    method cuatroAmigosMasNuevos(){
+    method cuatroAmigosMasNuevos() {
     	return amigos.drop(amigos.size() - 4)
     }
     
-    method cuatroAmigosMasAntiguos(){
+    method cuatroAmigosMasAntiguos() {
     	return amigos.take(4)
     }
     
-    method nuevaPareja(unSim){                                    //nuevo//
-    	pareja=unSim
+    method nuevaPareja(unSim) {
+    	pareja = unSim
     }
     
-    method pareja(){
+    method pareja() {
     	return pareja
     }
     
-    method amigos(){
+    method amigos() {
         return amigos
     }
     
-    method nuevoCirculoDeAmigos(unCirculoDeAmigos){
+    method nuevoCirculoDeAmigos(unCirculoDeAmigos) {
     	circuloDeAmigos = unCirculoDeAmigos
     }
     
-    method circuloDeAmigos(){
+    method circuloDeAmigos() {
     	return circuloDeAmigos
     }
     
-    method edad(){
+    method edad() {
         return edad
     }
     
-    method relacion(){
+    method relacion() {
     	return relacionActual
     }
     
-    method relacionesPasadas(){
+    method relacionesPasadas() {
     	return relaciones
     }
     
-    method popularidad(){
-        return popularidad
+    method popularidad() {
+        return amigos.map({amigo => amigo.nivelDeFelicidad()}).sum()
     }
     
-    method sexo(){
+    method sexo() {
         return sexo
     }
     
-    method sexoDePreferencia(){
+    method sexoDePreferencia() {
         return sexoDePreferencia
     }
     
-    method amigoMasValorado(){                         
+    method amigoMasValorado() {                         
     	return amigos.max({amigo => self.valoracion(amigo)})
     }
     
-    method valoracion(amigo){                                              
-        return personalidad.valoracion(self,amigo)
+    method valoracion(amigo) {                                              
+        return personalidad.valoracion(self, amigo)
     }
     
-    
-    method cambioDeAnimo(animoNuevo){                         
+    method cambioDeAnimo(animoNuevo) {                         
        estadoDeAnimo.deshacerAccion(self)
        estadoDeAnimo = animoNuevo
        estadoDeAnimo.accion(self)
     }
     
-    
-    method leAtrae(unSim){             //funciona esto? devuelve bool?                        
-        return (sexoDePreferencia==unSim.sexo())&&personalidad.atraccion(self,unSim)                    
+    method leAtrae(unSim) {                      
+        return (sexoDePreferencia == unSim.sexo()) && personalidad.atraccion(self,unSim)                    
     }
     
-    
-    method abrazarCorto(unSim){
-        abrazo.corto(self,unSim)
+    method abrazarCorto(unSim) {
+        abrazo.corto(self, unSim)
     }
     
-    method abrazarProlongado(unSim){
-        abrazo.prolongado(self,unSim)
+    method abrazarProlongado(unSim) {
+        abrazo.prolongado(self, unSim)
     }
     
-    
-    method agregarConocimiento(nuevoConocimiento){
+    method agregarConocimiento(nuevoConocimiento) {
         conocimientos.add(nuevoConocimiento)
     }
     
-    method conoce(unConocimiento){
+    method conoce(unConocimiento) {
     	return conocimientos.contains(unConocimiento)
     }
     
@@ -159,7 +148,7 @@ class Sim {
 		dinero += monto
 	}
 
-	method nivelDeConocedor(){
+	method nivelDeConocedor() {
 		return conocimientos.map({conocimiento => conocimiento.length()}).sum()
 	}
 
@@ -167,73 +156,66 @@ class Sim {
 		return trabajo
 	}
 	
-	method nuevoTrabajo(unTrabajo){
+	method nuevoTrabajo(unTrabajo) {
 		trabajo = unTrabajo
 	}
     
-    method olvidarseTodo(){
+    method olvidarseTodo() {
         conocimientos = #{}
     }
     
-    method quienesLeAtraen(unosSims){
-    	
+    method quienesLeAtraen(unosSims) {
     	return unosSims.filter({unSim => self.leAtrae(unSim)})
-    	
     }
     
-    method nuevaRelacion(unaRelacion){
-    relacionActual = unaRelacion
+    method nuevaRelacion(unaRelacion) {
+    	relacionActual = unaRelacion
     }
     
-    method empezarRelacionCon(unSim){
-   
-    new Relacion().iniciar(self, unSim)
-
-   
+    method empezarRelacionCon(unSim) {
+    	new Relacion().iniciar(self, unSim)
     }
     
-    method formaParteDe(unaRelacion){
-    return unaRelacion.esMiembro(self)
+    method formaParteDe(unaRelacion) {
+    	return unaRelacion.esMiembro(self)
     }
     
-    method nuevaRelacionPasada(unaRelacionPasada){
+    method nuevaRelacionPasada(unaRelacionPasada) {
     	relaciones.add(unaRelacionPasada)
     }
     
-    method terminarRelacionActual(){                           //nuevo//
-    	if(relacionActual != null){
-    	relaciones.add(relacionActual)
-    	self.nuevoCirculoDeAmigos(amigos)
-    	relacionActual.terminar()
-    	relacionActual=null
-    	pareja.terminarRelacionActual()
-    	pareja=null
+    method terminarRelacionActual() {
+    	if(relacionActual != null) {
+    		relaciones.add(relacionActual)
+    		self.nuevoCirculoDeAmigos(amigos)
+    		relacionActual.terminar()
+    		relacionActual = null
+    		pareja.terminarRelacionActual()
+    		pareja = null
     	}
     }
     
-    method reestablecerRelacionCon(unSim){
+    method reestablecerRelacionCon(unSim) {
     	relaciones.find({relacion => relacion.esIntegrante(unSim)}).reestablecer()
     }
     
-    method esElMasPopular(){
-  		circuloDeAmigos.forEach({amigo => amigo.calcularPopularidad()})
-  		self.calcularPopularidad()
+    method esElMasPopular() {
   		return self.popularidad() >= circuloDeAmigos.map({amigo => amigo.popularidad()}).max()
     }
     
-    method leAgarranCelos(celos){                       //un cambio aca,pasa celos por parametro//
+    method leAgarranCelos(celos) {
         celos.accion(self)
     }
     
-    method filtrarAmigosPorPlata(){
-        amigos=amigos.filter({amigo => amigo.dinero()<=dinero})
+    method filtrarAmigosPorPlata() {
+        amigos = amigos.filter({amigo => amigo.dinero() <= dinero})
     }
     
-    method filtrarAmigosPorPopularidad(){
-        amigos=amigos.filter({amigo => amigo.popularidad()<=popularidad})
+    method filtrarAmigosPorPopularidad() {
+        amigos = amigos.filter({amigo => amigo.popularidad() <= self.popularidad()})
     }
     
-    method filtrarAmigosPorPareja(){
-        amigos=amigos.filter({amigo => ((pareja.amigos()).contains(amigo)).negate()&&amigos.contains(amigo)})
+    method filtrarAmigosPorPareja() {
+        amigos = amigos.filter({amigo => ((pareja.amigos()).contains(amigo)).negate() && amigos.contains(amigo)})
     }
 }

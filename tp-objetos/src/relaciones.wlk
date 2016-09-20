@@ -1,12 +1,11 @@
 class Relacion{
-	
 	var circuloDeAmigos = #{}
 	var integrante1
 	var integrante2
 	var miembros = #{}
 	var termino
 	
-	method iniciar(unSim, otroSim){
+	method iniciar(unSim, otroSim) {
 		termino = false
 		unSim.nuevaRelacion(self)
 		otroSim.nuevaRelacion(self)
@@ -22,45 +21,42 @@ class Relacion{
 		miembros.add(integrante2)
 	}
 	
-	method funciona(){
+	method funciona() {
 		return integrante1.leAtrae(integrante2) && integrante2.leAtrae(integrante1)
 	}
 	
-	method esMiembro(unSim){
+	method esMiembro(unSim) {
 		return miembros.any({miembro => miembro == unSim})
 	}
 	
-	method sePudrioTodo(){
+	method sePudrioTodo() {
 		return not(self.funciona()) && circuloDeAmigos.any({amigo => miembros.any({integrante => integrante.leAtrae(amigo)})})
-		
 	}
 	
-	method esIntegrante(unSim){
+	method esIntegrante(unSim) {
 		return integrante1 == unSim || integrante2 == unSim
 	}
 	
-	method terminar(){
+	method terminar() {
 		miembros = []
 		termino = true
 	}
 	
-	method seTermino(){
+	method seTermino() {
 		return termino
 	}
 	
-	method circuloDeAmigos(){
+	method circuloDeAmigos() {
 		return circuloDeAmigos
 	}
 	
-	method miembros(){
+	method miembros() {
 		return miembros
 	}
 	
-	method reestablecer(){
-		
+	method reestablecer() {
 		integrante1.terminarRelacionActual()
 		integrante2.terminarRelacionActual()
 		self.iniciar(integrante1, integrante2)
 	}
-	
 }

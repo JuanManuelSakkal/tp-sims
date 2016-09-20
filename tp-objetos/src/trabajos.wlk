@@ -1,32 +1,32 @@
 class CopadosYAburridos {
-	
 	var puntosFelicidad
 	var pago
 	
 	method trabajar (unSim) {
-		unSim.darFelicidad(puntosFelicidad)
+		unSim.ganarFelicidad(puntosFelicidad)
 		unSim.ganarDinero(pago)
 	}
 }
 
-class Copado inherits CopadosYAburridos {
 
-	constructor(unosPuntosDeFelicidad, unPago){
+class Copado inherits CopadosYAburridos {
+	constructor(unosPuntosDeFelicidad, unPago) {
 		puntosFelicidad = unosPuntosDeFelicidad
 		pago = unPago
 	}
 }
 
+
 class Aburrido inherits CopadosYAburridos {
-	
 	constructor(unosPuntosDeFelicidad, unPago) {
 		puntosFelicidad = -unosPuntosDeFelicidad
 		pago = unPago
 	}
 }
 
+
 class Mercenario {
-	method trabajar(unSim){
+	method trabajar(unSim) {
 		unSim.ganarDinero(self.calcularSuma(unSim))
 	}
 	
@@ -35,6 +35,7 @@ class Mercenario {
 	}
 }
 
+
 object desocupado {
-		method trabajar(unSim){}
+		method trabajar(unSim) {}
 }
