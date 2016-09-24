@@ -1,6 +1,9 @@
 object celosPorPlata {
     method accion(unSim) {
         unSim.filtrarAmigosPorPlata()
+        //FIXME noten que en todos los celos siempre se 
+        //pierde 10 de felicidad. 
+        //Piensen en cómo evitar esta repetición de lógica
         unSim.ganarFelicidad(-10)
     }
 }

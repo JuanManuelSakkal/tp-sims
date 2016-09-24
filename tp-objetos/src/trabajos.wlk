@@ -1,4 +1,5 @@
 class CopadosYAburridos {
+	//FIXME ojo, estas variables nunca las usan!
 	var puntosFelicidad
 	var pago
 	

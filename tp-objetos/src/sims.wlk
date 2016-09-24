@@ -149,6 +149,8 @@ class Sim {
 	}
 
 	method nivelDeConocedor() {
+		//TODO tip: pueden usar el mensaje sum(unBloque) que es equivalente 
+		//a mapear y luego sumar
 		return conocimientos.map({conocimiento => conocimiento.length()}).sum()
 	}
 
@@ -184,6 +186,10 @@ class Sim {
     	relaciones.add(unaRelacionPasada)
     }
     
+    //FIXME es una mala idea modelar utilizando null, porque null es
+    //un objeto que sabe hacer muy pocas cosas y que nunca será polimórfico 
+    //con nada de su dominio y al que no pueden agregarle comportamiento
+    //Piensen como modelar las relaciones sin utilizar null.
     method terminarRelacionActual() {
     	if(relacionActual != null) {
     		relaciones.add(relacionActual)
@@ -207,15 +213,24 @@ class Sim {
         celos.accion(self)
     }
     
+	//FIXME no me termina de convencer los nombres de estos tres métodos: 
+	//filtrarAmigosPorPlata, filtrarAmigosPorPopularidad, filtrarAmigosPorPareja
+	// porque el nombre no me expresa adecuadamente según qué condición filtran. 
+	// Por ejemplo, este método....
     method filtrarAmigosPorPlata() {
         amigos = amigos.filter({amigo => amigo.dinero() <= dinero})
     }
-    
+    //...está en realidad quitando los amigos que sean más ricos que self. 
+    // Entonces, lo renombraría a, por ejemplo, removerAmigosRicos
     method filtrarAmigosPorPopularidad() {
+    	//TODO tip: existe un mensaje removeAllSuchThat que es similar al filter, 
+    	//pero tiene efecto. Con eso no es necesario reasignar amigos
         amigos = amigos.filter({amigo => amigo.popularidad() <= self.popularidad()})
     }
     
     method filtrarAmigosPorPareja() {
+    	//TODO todo esto deberían delegarlo: ((pareja.amigos()).contains(amigo)).negate()
+    	//De lo contrario, el código se vuelve complejo y difícil de entender
         amigos = amigos.filter({amigo => ((pareja.amigos()).contains(amigo)).negate() && amigos.contains(amigo)})
     }
 }
