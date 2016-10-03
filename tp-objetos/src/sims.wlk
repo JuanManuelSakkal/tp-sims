@@ -94,7 +94,7 @@ class Sim {
     }
     
     method popularidad() {
-        return amigos.map({amigo => amigo.nivelDeFelicidad()}).sum()
+        return amigos.sum({amigo => amigo.nivelDeFelicidad()})
     }
     
     method sexo() {
@@ -149,9 +149,12 @@ class Sim {
 	}
 
 	method nivelDeConocedor() {
-		//TODO tip: pueden usar el mensaje sum(unBloque) que es equivalente 
 		//a mapear y luego sumar
-		return conocimientos.map({conocimiento => conocimiento.length()}).sum()
+		return conocimientos.sum({conocimiento => conocimiento.length()})
+	}
+	
+	method sabe(unConocimiento) {
+		return self.conocimientos().contains(unConocimiento)
 	}
 
 	method trabajo() {

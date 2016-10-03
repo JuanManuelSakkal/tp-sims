@@ -330,10 +330,7 @@ test "22 - Contarle una informacion a un Sim" {
 	
 	chismoso.agregarConocimiento("tom volvio con summer")
 	
-	//FIXME más que hacer conocimientos().contains(...), 
-	//sería mejor contar con un mensaje sabe(....) que nos diga
-	//si un sim tiene a ese conocimiento
-	assert.that(chismoso.conocimientos().contains("tom volvio con summer"))
+	assert.that(chismoso.sabe("tom volvio con summer"))
 }
 
 test "23 - Cuan conocedor es un Sim" {
