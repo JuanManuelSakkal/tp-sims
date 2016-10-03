@@ -60,6 +60,7 @@ test "1 - Un Sim abraza (largo fallido) a otro" {
 	
 	juana.abrazarProlongado(josefa)
 	
+	//FIXME: esa bien que un nivel de felicidad pase a ser negativo?
 	assert.equals(-195, josefa.nivelDeFelicidad())
 }
 
@@ -311,6 +312,7 @@ test "20 - A un Sim le atrae otro" {
 	assert.that(polly.leAtrae(ruben))
 }
 
+//FIXME ojo, este test estÃ¡ rompiendo!
 test "21 - Encontrar los Sims por los que se siente atraido otro Sim" {
 	var polly = fixture.unSimMujerConPersonalidad(peleadoConLaVida)
 	var ross = fixture.unSimFeliz()
@@ -328,6 +330,9 @@ test "22 - Contarle una informacion a un Sim" {
 	
 	chismoso.agregarConocimiento("tom volvio con summer")
 	
+	//FIXME mÃ¡s que hacer conocimientos().contains(...), 
+	//serÃ­a mejor contar con un mensaje sabe(....) que nos diga
+	//si un sim tiene a ese conocimiento
 	assert.that(chismoso.conocimientos().contains("tom volvio con summer"))
 }
 
@@ -508,4 +513,4 @@ test "29 - Un Sim desocupado no gana nada" {
 	assert.equals(0, kenshin.dinero())
 }
 
-//30 - La repetición de lógica que no pudimos evitar con las herramientas vistas hasta ahora la podemos ver por ejemplo en el ejercicio de abrazos y en el de celos, que al no poder pasar el mensaje por parametro nos obliga a hacer un metodo distinto para cada opción 
+//30 - La repeticiï¿½n de lï¿½gica que no pudimos evitar con las herramientas vistas hasta ahora la podemos ver por ejemplo en el ejercicio de abrazos y en el de celos, que al no poder pasar el mensaje por parametro nos obliga a hacer un metodo distinto para cada opciï¿½n 
