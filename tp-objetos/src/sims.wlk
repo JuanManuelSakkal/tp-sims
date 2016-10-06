@@ -216,24 +216,23 @@ class Sim {
         celos.accion(self)
     }
     
-	//FIXME no me termina de convencer los nombres de estos tres métodos: 
-	//filtrarAmigosPorPlata, filtrarAmigosPorPopularidad, filtrarAmigosPorPareja
-	// porque el nombre no me expresa adecuadamente según qué condición filtran. 
-	// Por ejemplo, este método....
-    method filtrarAmigosPorPlata() {
+	//Nombres de metodos cambiados
+    method removerAmigosRicos() {
         amigos = amigos.filter({amigo => amigo.dinero() <= dinero})
     }
-    //...está en realidad quitando los amigos que sean más ricos que self. 
-    // Entonces, lo renombraría a, por ejemplo, removerAmigosRicos
-    method filtrarAmigosPorPopularidad() {
+
+    method removerAmigosPopulares() {
     	//TODO tip: existe un mensaje removeAllSuchThat que es similar al filter, 
     	//pero tiene efecto. Con eso no es necesario reasignar amigos
         amigos = amigos.filter({amigo => amigo.popularidad() <= self.popularidad()})
     }
     
-    method filtrarAmigosPorPareja() {
-    	//TODO todo esto deberían delegarlo: ((pareja.amigos()).contains(amigo)).negate()
-    	//De lo contrario, el código se vuelve complejo y difícil de entender
-        amigos = amigos.filter({amigo => ((pareja.amigos()).contains(amigo)).negate() && amigos.contains(amigo)})
+    method removerAmigosDePareja() {
+    	//Delegado con noEsAmigoDePareja()
+        amigos = amigos.filter({amigo => self.noEsAmigoDePareja(amigo) && amigos.contains(amigo)})
+    }
+    
+    method noEsAmigoDePareja(unAmigo) {
+    	return ((pareja.amigos()).contains(unAmigo)).negate()
     }
 }

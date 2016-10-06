@@ -1,6 +1,6 @@
 object celosPorPlata {
     method accion(unSim) {
-        unSim.filtrarAmigosPorPlata()
+        unSim.removerAmigosRicos()
         //FIXME noten que en todos los celos siempre se 
         //pierde 10 de felicidad. 
         //Piensen en cómo evitar esta repetición de lógica
@@ -11,7 +11,7 @@ object celosPorPlata {
 
 object celosPorPopularidad {
     method accion(unSim) {
-        unSim.filtrarAmigosPorPopularidad()
+        unSim.removerAmigosPopulares()
         unSim.ganarFelicidad(-10)
     }
 }
@@ -19,7 +19,7 @@ object celosPorPopularidad {
 
 object celosPorPareja {
     method accion(unSim) {
-        unSim.filtrarAmigosPorPareja()
+        unSim.removerAmigosDePareja()
         unSim.ganarFelicidad(-10)
     }
 }
