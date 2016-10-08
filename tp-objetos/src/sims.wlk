@@ -31,6 +31,11 @@ class Sim {
     	nivelDeFelicidad += cuantaFelicidad
     }
     
+    method perderFelicidad(cuantaFelicidad){
+    	if(cuantaFelicidad > nivelDeFelicidad){nivelDeFelicidad = 0}
+    	else {nivelDeFelicidad -= cuantaFelicidad}
+    }
+    
 	method hacerseAmigoDe(amigo) {
         amigos.add(amigo)
         circuloDeAmigos.add(amigo)

@@ -1,26 +1,32 @@
-object celosPorPlata {
+class Celos {
+	method perderFelicidad(unSim){
+		unSim.perderFelicidad(10)
+	}
+}
+
+object celosPorPlata inherits Celos {
     method accion(unSim) {
         unSim.removerAmigosRicos()
         //FIXME noten que en todos los celos siempre se 
         //pierde 10 de felicidad. 
         //Piensen en cómo evitar esta repetición de lógica
-        unSim.ganarFelicidad(-10)
+        self.perderFelicidad(unSim)
     }
 }
 
 
-object celosPorPopularidad {
+object celosPorPopularidad inherits Celos{
     method accion(unSim) {
         unSim.removerAmigosPopulares()
-        unSim.ganarFelicidad(-10)
+        self.perderFelicidad(unSim)
     }
 }
 
 
-object celosPorPareja {
+object celosPorPareja inherits Celos{
     method accion(unSim) {
         unSim.removerAmigosDePareja()
-        unSim.ganarFelicidad(-10)
+        self.perderFelicidad(unSim)
     }
 }
 
@@ -38,14 +44,14 @@ object soniador {
     }
     
     method deshacerAccion(unSim) {
-    	unSim.ganarFelicidad(-1000)
+    	unSim.perderFelicidad(1000)
     }
 }
 
 
 object incomodo {
     method accion(unSim) {
-        unSim.ganarFelicidad(-200)
+        unSim.perderFelicidad(200)
     }
     method deshacerAccion(unSim) {
     	unSim.ganarFelicidad(200)

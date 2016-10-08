@@ -61,7 +61,7 @@ test "1 - Un Sim abraza (largo fallido) a otro" {
 	juana.abrazarProlongado(josefa)
 	
 	//FIXME: esa bien que un nivel de felicidad pase a ser negativo?
-	assert.equals(-195, josefa.nivelDeFelicidad())
+	assert.equals(0, josefa.nivelDeFelicidad())
 }
 
 test "2 - Cuanto valora un Sim a otro" {
