@@ -1,6 +1,11 @@
-class CopadosYAburridos {
+class TrabajosQueAfectanLaMoral {
 	var puntosFelicidad
 	var pago
+	
+	constructor(unosPuntosDeFelicidad, unPago) {
+		puntosFelicidad = unosPuntosDeFelicidad
+		pago = unPago
+	}
 	
 	method trabajar (unSim) {
 		unSim.ganarFelicidad(puntosFelicidad)
@@ -9,19 +14,13 @@ class CopadosYAburridos {
 }
 
 
-class Copado inherits CopadosYAburridos {
-	constructor(unosPuntosDeFelicidad, unPago) {
-		puntosFelicidad = unosPuntosDeFelicidad
-		pago = unPago
-	}
+class Copado inherits TrabajosQueAfectanLaMoral {
+	constructor(unosPuntosDeFelicidad, unPago) = super(unosPuntosDeFelicidad, unPago)
 }
 
 
-class Aburrido inherits CopadosYAburridos {
-	constructor(unosPuntosDeFelicidad, unPago) {
-		puntosFelicidad = -unosPuntosDeFelicidad
-		pago = unPago
-	}
+class Aburrido inherits TrabajosQueAfectanLaMoral {
+	constructor(unosPuntosDeFelicidad, unPago) = super(-unosPuntosDeFelicidad, unPago)
 }
 
 
