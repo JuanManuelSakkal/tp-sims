@@ -226,13 +226,10 @@ class Sim {
     }
 
     method removerAmigosPopulares() {
-    	//TODO tip: existe un mensaje removeAllSuchThat que es similar al filter, 
-    	//pero tiene efecto. Con eso no es necesario reasignar amigos
-        amigos = amigos.filter({amigo => amigo.popularidad() <= self.popularidad()})
+        amigos.removeAllSuchThat({amigo => amigo.popularidad() <= self.popularidad()})
     }
     
     method removerAmigosDePareja() {
-    	//Delegado con noEsAmigoDePareja()
         amigos = amigos.filter({amigo => self.noEsAmigoDePareja(amigo) && amigos.contains(amigo)})
     }
     
