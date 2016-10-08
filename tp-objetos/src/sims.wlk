@@ -14,7 +14,7 @@ class Sim {
     var estadoDeAnimo = normal
     var sexoDePreferencia
     var trabajo = desocupado
-    var pareja
+    var estadoCivil = soltero
     var conocimientos = #{}
     var relacionActual
     var relaciones = []
@@ -32,7 +32,8 @@ class Sim {
     }
     
     method perderFelicidad(cuantaFelicidad){
-    	(nivelDeFelicidad -= cuantaFelicidad).max(0)
+    	
+    	nivelDeFelicidad = (nivelDeFelicidad -= cuantaFelicidad).max(0)
     }
     
 	method hacerseAmigoDe(amigo) {
@@ -53,6 +54,10 @@ class Sim {
     	return conocimientos
     }
     
+    method pareja(){
+    	return relacionActual.parejaDe(self)
+    }
+    
     method esAmigoDe(unSim) {
     	return unSim.amigos().contains(self)
     }
@@ -65,12 +70,8 @@ class Sim {
     	return amigos.take(4)
     }
     
-    method nuevaPareja(unSim) {
-    	pareja = unSim
-    }
-    
-    method pareja() {
-    	return pareja
+    method nuevoEstadoCivil(unEstadoCivil){
+    	estadoCivil = unEstadoCivil
     }
     
     method amigos() {
@@ -177,12 +178,18 @@ class Sim {
     	return unosSims.filter({unSim => self.leAtrae(unSim)})
     }
     
+    method estadoCivil(){
+    	return estadoCivil
+    }
+    
     method nuevaRelacion(unaRelacion) {
     	relacionActual = unaRelacion
     }
     
     method empezarRelacionCon(unSim) {
     	new Relacion().iniciar(self, unSim)
+    	self.nuevoCirculoDeAmigos(relacionActual.circuloDeAmigos())
+    	unSim.nuevoCirculoDeAmigos(relacionActual.circuloDeAmigos())
     }
     
     method formaParteDe(unaRelacion) {
@@ -198,13 +205,12 @@ class Sim {
     //con nada de su dominio y al que no pueden agregarle comportamiento
     //Piensen como modelar las relaciones sin utilizar null.
     method terminarRelacionActual() {
-    	if(relacionActual != null) {
+    	if(estadoCivil != soltero) {
     		relaciones.add(relacionActual)
     		self.nuevoCirculoDeAmigos(amigos)
-    		relacionActual.terminar()
-    		relacionActual = null
-    		pareja.terminarRelacionActual()
-    		pareja = null
+    		self.nuevoEstadoCivil(soltero)
+    		relacionActual.miembros().forEach({miembro => miembro.terminarRelacionActual()})
+			relacionActual.terminar()
     	}
     }
     
@@ -222,18 +228,18 @@ class Sim {
     
 	//Nombres de metodos cambiados
     method removerAmigosRicos() {
-        amigos = amigos.filter({amigo => amigo.dinero() <= dinero})
+        amigos.removeAllSuchThat({amigo => amigo.dinero() > dinero})
     }
 
     method removerAmigosPopulares() {
-        amigos.removeAllSuchThat({amigo => amigo.popularidad() <= self.popularidad()})
+        amigos.removeAllSuchThat({amigo => amigo.popularidad() > self.popularidad()})
     }
     
     method removerAmigosDePareja() {
-        amigos = amigos.filter({amigo => self.noEsAmigoDePareja(amigo) && amigos.contains(amigo)})
+        amigos.removeAllSuchThat({amigo => self.esAmigoDePareja(amigo) && amigos.contains(amigo)})
     }
     
-    method noEsAmigoDePareja(unAmigo) {
-    	return ((pareja.amigos()).contains(unAmigo)).negate()
+    method esAmigoDePareja(unAmigo) {
+    	return (self.pareja().amigos()).contains(unAmigo)
     }
 }

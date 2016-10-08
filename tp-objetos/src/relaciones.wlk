@@ -12,18 +12,18 @@ class Relacion{
 		termino = false
 		//FIXME acá hay bastante código repetido. Noten que la mayoría de las 
 		//cosas que hacen para un sim, las hacen también al otro
-		unSim.nuevaRelacion(self)
-		otroSim.nuevaRelacion(self)
-		unSim.amigos().forEach({amigo => circuloDeAmigos.add(amigo)})
-		otroSim.amigos().forEach({amigo => circuloDeAmigos.add(amigo)})
-		unSim.nuevaPareja(otroSim)
-    	otroSim.nuevaPareja(unSim)
-    	unSim.nuevoCirculoDeAmigos(circuloDeAmigos)
-    	otroSim.nuevoCirculoDeAmigos(circuloDeAmigos)
+		self.ponerEnRelacion(unSim)
+		self.ponerEnRelacion(otroSim)
     	integrante1 = unSim
 		integrante2 = otroSim
-		miembros.add(integrante1)
-		miembros.add(integrante2)
+
+	}
+	
+	method ponerEnRelacion(unSim){
+		unSim.nuevaRelacion(self)
+		unSim.amigos().forEach({amigo => circuloDeAmigos.add(amigo)})
+		unSim.nuevoEstadoCivil(enPareja)
+		miembros.add(unSim)
 	}
 	
 	method funciona() {
@@ -32,6 +32,10 @@ class Relacion{
 	
 	method esMiembro(unSim) {
 		return miembros.any({miembro => miembro == unSim})
+	}
+	
+	method parejaDe(unSim){
+		return miembros.find({miembro => miembro != unSim})
 	}
 	
 	method sePudrioTodo() {
@@ -65,3 +69,9 @@ class Relacion{
 		self.iniciar(integrante1, integrante2)
 	}
 }
+
+object soltero{
+	
+}
+
+object enPareja{}

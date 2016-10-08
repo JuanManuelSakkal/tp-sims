@@ -60,7 +60,6 @@ test "1 - Un Sim abraza (largo fallido) a otro" {
 	
 	juana.abrazarProlongado(josefa)
 	
-	//FIXME: esa bien que un nivel de felicidad pase a ser negativo?
 	assert.equals(0, josefa.nivelDeFelicidad())
 }
 
@@ -221,7 +220,7 @@ test "13 - Terminar relacion" {
 	
 	rick.terminarRelacionActual()
 	
-	assert.equals(null, ilsa.relacion())
+	assert.equals(soltero, ilsa.estadoCivil())
 }
 
 test "14 - Saber si una relacion termino" {
@@ -300,7 +299,7 @@ test "19 - Reestablecer una relacion" {
 	
 	tom.reestablecerRelacionCon(summer)
 	
-	assert.equals(summer, tom.pareja())
+	assert.that(tom.relacion().esMiembro(summer))
 }
 
 test "20 - A un Sim le atrae otro" {
