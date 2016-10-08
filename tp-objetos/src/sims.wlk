@@ -32,8 +32,7 @@ class Sim {
     }
     
     method perderFelicidad(cuantaFelicidad){
-    	if(cuantaFelicidad > nivelDeFelicidad){nivelDeFelicidad = 0}
-    	else {nivelDeFelicidad -= cuantaFelicidad}
+    	(nivelDeFelicidad -= cuantaFelicidad).max(0)
     }
     
 	method hacerseAmigoDe(amigo) {
