@@ -5,13 +5,9 @@ class Relacion{
 	var miembros = #{}
 	var termino
 	
-	//FIXME este método es bastante largo y complejo
-	//no podrían delegarlo y partir el problema 
-	//en subproblemas más chicos?
+	
 	method iniciar(unSim, otroSim) {
 		termino = false
-		//FIXME acá hay bastante código repetido. Noten que la mayoría de las 
-		//cosas que hacen para un sim, las hacen también al otro
 		self.ponerEnRelacion(unSim)
 		self.ponerEnRelacion(otroSim)
     	integrante1 = unSim

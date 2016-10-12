@@ -311,7 +311,7 @@ test "20 - A un Sim le atrae otro" {
 	assert.that(polly.leAtrae(ruben))
 }
 
-//FIXME ojo, este test está rompiendo!
+//A nosotros nos corre
 test "21 - Encontrar los Sims por los que se siente atraido otro Sim" {
 	var polly = fixture.unSimMujerConPersonalidad(peleadoConLaVida)
 	var ross = fixture.unSimFeliz()

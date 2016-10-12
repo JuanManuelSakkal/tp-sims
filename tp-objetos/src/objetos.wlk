@@ -7,9 +7,6 @@ class Celos {
 object celosPorPlata inherits Celos {
     method accion(unSim) {
         unSim.removerAmigosRicos()
-        //FIXME noten que en todos los celos siempre se 
-        //pierde 10 de felicidad. 
-        //Piensen en cómo evitar esta repetición de lógica
         self.perderFelicidad(unSim)
     }
 }

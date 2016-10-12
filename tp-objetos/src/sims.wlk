@@ -200,10 +200,7 @@ class Sim {
     	relaciones.add(unaRelacionPasada)
     }
     
-    //FIXME es una mala idea modelar utilizando null, porque null es
-    //un objeto que sabe hacer muy pocas cosas y que nunca será polimórfico 
-    //con nada de su dominio y al que no pueden agregarle comportamiento
-    //Piensen como modelar las relaciones sin utilizar null.
+
     method terminarRelacionActual() {
     	if(estadoCivil != soltero) {
     		relaciones.add(relacionActual)
