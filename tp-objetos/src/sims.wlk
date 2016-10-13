@@ -200,6 +200,19 @@ class Sim {
     	relaciones.add(unaRelacionPasada)
     }
     
+    method prestar(unMonto,unSim) {
+    	dinero -= unMonto
+    	unSim.ganarDinero(unMonto)
+    }
+    
+    method lePuedePrestarA(unSim,unMonto){	
+    	return unMonto < dinero && unMonto <= self.dispuestoAPrestarA(unSim) && personalidad.lePrestaA(unSim,unMonto)
+    }
+    
+    method dispuestoAPrestarA(unSim){
+    	return 10* self.valoracion(unSim)
+    	
+    }
 
     method terminarRelacionActual() {
     	if(estadoCivil != soltero) {

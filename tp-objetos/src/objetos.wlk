@@ -7,6 +7,7 @@ class Celos {
 object celosPorPlata inherits Celos {
     method accion(unSim) {
         unSim.removerAmigosRicos()
+        
         self.perderFelicidad(unSim)
     }
 }
@@ -75,6 +76,11 @@ object abrazo {
 
 class Personalidad {
 	method bonusFelicidad(unSim) {}
+	 
+	method lePrestaA(unSim,unMonto) {
+		return true
+	} 
+	
 }
 
 
@@ -85,6 +91,10 @@ object interesado inherits Personalidad {
     
     method atraccion(siMismo, unSim) {
         return unSim.dinero() >= siMismo.dinero() * 2
+    }
+    
+    override method lePrestaA(unSim,unMonto){
+    	return unMonto < unSim.dinero()
     }
 }
 
