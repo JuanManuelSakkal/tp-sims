@@ -509,4 +509,10 @@ test "29 - Un Sim desocupado no gana nada" {
 	assert.equals(0, kenshin.dinero())
 }
 
+test "2.1 - Cuanto le puede prestar a otro sim" {
+	var leonardo = fixture.unSimHombre()
+	var rafael = fixture.unSimHombre()
+	
+	assert.equals(50, rafael.dispuestoAPrestarA(leonardo))
+}
 //30 - La repetici�n de l�gica que no pudimos evitar con las herramientas vistas hasta ahora la podemos ver por ejemplo en el ejercicio de abrazos y en el de celos, que al no poder pasar el mensaje por parametro nos obliga a hacer un metodo distinto para cada opci�n 
