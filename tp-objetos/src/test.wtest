@@ -515,4 +515,22 @@ test "2.1 - Cuanto le puede prestar a otro sim" {
 	
 	assert.equals(50, rafael.dispuestoAPrestarA(leonardo))
 }
+
+test "2.2 - Un sim le presta a otro efectivamente" {
+	var vito = fixture.unSimHombre()
+	var michael = fixture.unSimHombre()
+	vito.ganarDinero(100)
+	vito.prestar(50,michael)
+	assert.equals(50,michael.dinero())
+}
+
+test "2.2 - Un sim le presta a otro y falla" {
+	var vito = fixture.unSimHombre()
+	var michael = fixture.unSimHombre()
+	
+	vito.ganarDinero(100)
+	assert.throwsException({vito.prestar(60,michael)})
+}
+
+
 //30 - La repetici�n de l�gica que no pudimos evitar con las herramientas vistas hasta ahora la podemos ver por ejemplo en el ejercicio de abrazos y en el de celos, que al no poder pasar el mensaje por parametro nos obliga a hacer un metodo distinto para cada opci�n 

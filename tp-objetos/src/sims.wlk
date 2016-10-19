@@ -201,8 +201,12 @@ class Sim {
     }
     
     method prestar(unMonto,unSim) {
+    	if (self.lePuedePrestarA(unSim,unMonto)){
     	dinero -= unMonto
-    	unSim.ganarDinero(unMonto)
+    	unSim.ganarDinero(unMonto)}
+    	else{
+    		error.throwWithMessage("No puede prestarle") 
+    	}
     }
     
     method lePuedePrestarA(unSim,unMonto){	
