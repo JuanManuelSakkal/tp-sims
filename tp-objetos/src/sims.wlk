@@ -152,10 +152,11 @@ class Sim {
     }
     
     method difundir(unConocimiento) {
-    	conocimientos.add(unConocimiento)
-    	if(self.conoce(unConocimiento)){
+    	if(self.conoce(unConocimiento).negate()){
     		amigos.forEach({amigo => amigo.agregarConocimiento(unConocimiento)})
     	}	
+    	conocimientos.add(unConocimiento)
+    	
     }
     
     method esSecreto(unConocimiento){

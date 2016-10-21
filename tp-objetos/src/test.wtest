@@ -621,6 +621,35 @@ test "2.6 - Un conocimientoo es privado para un sim" {
 	assert.that(timmy.esSecreto("mea la cama"))
 }
 
+test "2.7 - Difundir una informacion(en si mismo)  " {
+	var timmy = fixture.unSimHombre()
+	var aj = fixture.unSimHombre()
+	timmy.hacerseAmigoDe(aj)
+	timmy.difundir("exisen los padrinos magicos")
+	assert.that(timmy.conocimientos().contains("exisen los padrinos magicos"))
+}
+
+test "2.7 - Difundir una informacion(en otro sim)  " {
+	var timmy = fixture.unSimHombre()
+	var aj = fixture.unSimHombre()
+	timmy.hacerseAmigoDe(aj)
+	timmy.difundir("exisen los padrinos magicos")
+	assert.that(aj.conocimientos().contains("exisen los padrinos magicos"))
+}
+
+test "2.8 - desparramar secretos"{
+	var timmy = fixture.unSimHombre()
+	var aj = fixture.unSimHombre()
+	var croker = fixture.unSimHombre()
+	timmy.hacerseAmigoDe(croker)
+	timmy.hacerseAmigoDe(aj)
+	croker.hacerseAmigoDe(aj)
+	timmy.agregarConocimiento("existen los padrinos magicos")
+	croker.desparramarUnChisme(timmy,"existen los padrinos magicos")
+	assert.that(aj.conoce("existen los padrinos magicos"))
+}
+
+
 test "2.11 - Un Vim cumple anios" {
 	var blade = fixture.unVampiro()
 	blade.cumplirAnios()
