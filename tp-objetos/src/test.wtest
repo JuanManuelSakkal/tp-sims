@@ -9,10 +9,6 @@ object fixture {
 		return new Sim("hombre", 45, 10, buenazo, "mujer")
 	}
 	
-	method unVampiro() {
-		return new Vim ("hombre",19,10,buenazo,"mujer")
-	}
-	
 	method unSimMujer() {
 		return new Sim("mujer", 25, 30, interesado, "hombre")
 	}
@@ -28,10 +24,14 @@ object fixture {
 	method unSimHombreConPersonalidad(unaPersonalidad) {
 		return new Sim("hombre", 30, 5, unaPersonalidad, "hombre")
 	}	
+	
+	method unVampiro() {
+		return new Vim ("hombre", 19, 10, buenazo, "mujer")
+	}
 }
 
 
-test "1 - un sim abraza (corto) a otro, como cambia a pedro" {
+test "1.1 - un sim abraza (corto) a otro, como cambia a pedro" {
 	var nacho = fixture.unSimHombre()
 	var pedro = fixture.unSimHombre()
 	
@@ -40,7 +40,7 @@ test "1 - un sim abraza (corto) a otro, como cambia a pedro" {
 	assert.equals(12, pedro.nivelDeFelicidad())
 }
 
-test "1 - Un Sim abraza (corto) a otro, como cambia a nacho" {
+test "1.1 - Un Sim abraza (corto) a otro, como cambia a nacho" {
 	var nacho = fixture.unSimHombre()
 	var pedro = fixture.unSimHombre()
 	
@@ -49,7 +49,7 @@ test "1 - Un Sim abraza (corto) a otro, como cambia a nacho" {
 	assert.equals(14, nacho.nivelDeFelicidad())
 }
 
-test "1 - Un Sim abraza (largo efectivo) a otro" {
+test "1.1 - Un Sim abraza (largo efectivo) a otro" {
 	var juana = fixture.unSimMujer()
 	var jose = fixture.unSimHombre()
 	
@@ -58,7 +58,7 @@ test "1 - Un Sim abraza (largo efectivo) a otro" {
 	assert.equals(1010, jose.nivelDeFelicidad())
 }
 
-test "1 - Un Sim abraza (largo fallido) a otro" {
+test "1.1 - Un Sim abraza (largo fallido) a otro" {
 	var juana = fixture.unSimMujerConPersonalidad(superficial)
 	var josefa = fixture.unSimMujerConPersonalidad(peleadoConLaVida)
 	
@@ -67,14 +67,14 @@ test "1 - Un Sim abraza (largo fallido) a otro" {
 	assert.equals(0, josefa.nivelDeFelicidad())
 }
 
-test "2 - Cuanto valora un Sim a otro" {
+test "1.2 - Cuanto valora un Sim a otro" {
 	var juana = fixture.unSimMujer()
 	var jose = fixture.unSimHombre()
 	
 	assert.equals(0, juana.valoracion(jose))
 }
 
-test "3 - El amigo mas valorado" {
+test "1.3 - El amigo mas valorado" {
 	var leonardo = fixture.unSimHombre()
 	var rafael = fixture.unSimHombre()
 	var donatelo = fixture.unSimHombre()
@@ -89,7 +89,7 @@ test "3 - El amigo mas valorado" {
 	assert.equals(leonardo, miguelangel.amigoMasValorado())
 }
 
-test "4 - Hacer que un Sim se haga amigo de otro" {
+test "1.4 - Hacer que un Sim se haga amigo de otro" {
 	var maria = fixture.unSimMujer()
 	var antonieto = fixture.unSimHombre()
 	
@@ -98,7 +98,7 @@ test "4 - Hacer que un Sim se haga amigo de otro" {
 	assert.that(maria.amigos().contains(antonieto))
 }
 
-test "5 - Hacer que dos sims se hagan amigos entre si" {
+test "1.5 - Hacer que dos sims se hagan amigos entre si" {
 	var maria = fixture.unSimMujer()
 	var antonieto = fixture.unSimHombre()
 	
@@ -108,7 +108,7 @@ test "5 - Hacer que dos sims se hagan amigos entre si" {
 	assert.that(maria.amigos().contains(antonieto))
 }
 
-test "6 - Saber si un Sim es amigo de otro" {
+test "1.6 - Saber si un Sim es amigo de otro" {
 	var maria = fixture.unSimMujer()
 	var antonieto = fixture.unSimHombre()
 	
@@ -117,7 +117,7 @@ test "6 - Saber si un Sim es amigo de otro" {
 	assert.that(antonieto.esAmigoDe(maria))
 }
 
-test "7 - Saber cuales son sus 4 amigos mas nuevos" {
+test "1.7 - Saber cuales son sus 4 amigos mas nuevos" {
 	var maria = fixture.unSimMujer()
 	var antonieto = fixture.unSimHombre()
 	var pepe = fixture.unSimHombre()
@@ -134,7 +134,7 @@ test "7 - Saber cuales son sus 4 amigos mas nuevos" {
 	assert.equals([antonieto, carlos, juana, matilda], maria.cuatroAmigosMasNuevos())
 }
 
-test "8 - Saber cuales son sus 4 amigos mas antiguos" {
+test "1.8 - Saber cuales son sus 4 amigos mas antiguos" {
 	var maria = fixture.unSimMujer()
 	var antonieto = fixture.unSimHombre()
 	var pepe = fixture.unSimHombre()
@@ -151,7 +151,7 @@ test "8 - Saber cuales son sus 4 amigos mas antiguos" {
 	assert.equals([pepe, antonieto, carlos, juana], maria.cuatroAmigosMasAntiguos())
 }
 
-test "9 - Preguntar cual es el nivel de popularidad" {
+test "1.9 - Preguntar cual es el nivel de popularidad" {
 	var maria = fixture.unSimMujer()
 	var antonieto = fixture.unSimHombre()
 	
@@ -161,7 +161,7 @@ test "9 - Preguntar cual es el nivel de popularidad" {
 	assert.equals(15, maria.popularidad())
 }
 
-test "10 - Es el mas popular de su circulo de amigos" {
+test "1.10 - Es el mas popular de su circulo de amigos" {
 	var harry = fixture.unSimHombre()
 	var sally = fixture.unSimMujer()
 	var maria = fixture.unSimMujer()
@@ -176,7 +176,7 @@ test "10 - Es el mas popular de su circulo de amigos" {
 	assert.that(harry.esElMasPopular())
 }
 
-test "10 - No es el mas popular de su circulo de amigos" {
+test "1.10 - No es el mas popular de su circulo de amigos" {
 	var harry = fixture.unSimHombre()
 	var sally = fixture.unSimMujer()
 	var maria = fixture.unSimMujer()
@@ -192,7 +192,7 @@ test "10 - No es el mas popular de su circulo de amigos" {
 	assert.that(not(harry.esElMasPopular()))
 }
 
-test "11 - Empezar una relacion" {
+test "1.11 - Empezar una relacion" {
 	var harry = fixture.unSimHombre()
 	var sally = fixture.unSimMujer()
 	
@@ -201,13 +201,13 @@ test "11 - Empezar una relacion" {
 	assert.that(harry.formaParteDe(sally.relacion()))
 }
 
-test "12 - Forma parte de una relacion? No" {
+test "1.12 - Forma parte de una relacion? No" {
 	var rick = fixture.unSimHombre()
 	
 	assert.equals(null, rick.relacion())
 }
 
-test "12 - Forma parte de una relacion? Si" {
+test "1.12 - Forma parte de una relacion? Si" {
 	var harry = fixture.unSimHombre()
 	var sally = fixture.unSimMujer()
 	
@@ -216,7 +216,7 @@ test "12 - Forma parte de una relacion? Si" {
 	assert.equals(harry.pareja(), sally)
 }
 
-test "13 - Terminar relacion" {
+test "1.13 - Terminar relacion" {
 	var rick = fixture.unSimHombre()
 	var ilsa = fixture.unSimMujer()
 	
@@ -227,7 +227,7 @@ test "13 - Terminar relacion" {
 	assert.equals(soltero, ilsa.estadoCivil())
 }
 
-test "14 - Saber si una relacion termino" {
+test "1.14 - Saber si una relacion termino" {
 	var rick = fixture.unSimHombre()
 	var ilsa = fixture.unSimMujer()
 	
@@ -240,7 +240,7 @@ test "14 - Saber si una relacion termino" {
 
 
 
-test "15 - Conocer el circulo de amigos" {
+test "1.15 - Conocer el circulo de amigos" {
 	var ross = fixture.unSimHombre()
 	var rachel = fixture.unSimMujer()
 	var chandler = fixture.unSimHombre()
@@ -258,7 +258,7 @@ test "15 - Conocer el circulo de amigos" {
 	assert.equals(#{chandler,joey,pheobe,monica}, (ross.relacion()).circuloDeAmigos())
 }
 
-test "16 - Integrantes de una relacion" {
+test "1.16 - Integrantes de una relacion" {
 	var marcelus = fixture.unSimHombre()
 	var mia = fixture.unSimMujer()
 	
@@ -267,7 +267,7 @@ test "16 - Integrantes de una relacion" {
 	assert.equals(#{marcelus,mia}, marcelus.relacion().miembros())
 }
 
-test "17 - Funciona esta relacion?" {
+test "1.17 - Funciona esta relacion?" {
 	var ruben = fixture.unSimHombre()
 	var polly = fixture.unSimMujerConPersonalidad(peleadoConLaVida)
 	
@@ -276,7 +276,7 @@ test "17 - Funciona esta relacion?" {
 	assert.that((ruben.relacion()).funciona())
 }
 
-test "18 - En esta relacion se pudrio todo?" {
+test "1.18 - En esta relacion se pudrio todo?" {
 	var tom = fixture.unSimHombre()
 	var summer = fixture.unSimMujerConPersonalidad(superficial)
 	var autumn = fixture.unSimMujerConPersonalidad(buenazo)
@@ -288,7 +288,7 @@ test "18 - En esta relacion se pudrio todo?" {
 	assert.that((tom.relacion()).sePudrioTodo())
 }
 
-test "19 - Reestablecer una relacion" {
+test "1.19 - Reestablecer una relacion" {
 	var tom = fixture.unSimHombre()
 	var summer = fixture.unSimMujerConPersonalidad(superficial)
 	var autumn = fixture.unSimMujerConPersonalidad(buenazo)
@@ -306,7 +306,7 @@ test "19 - Reestablecer una relacion" {
 	assert.that(tom.relacion().esMiembro(summer))
 }
 
-test "20 - A un Sim le atrae otro" {
+test "1.20 - A un Sim le atrae otro" {
 	var ruben = fixture.unSimHombre()
 	var polly = fixture.unSimMujerConPersonalidad(peleadoConLaVida)
 	
@@ -316,7 +316,7 @@ test "20 - A un Sim le atrae otro" {
 }
 
 //A nosotros nos corre
-test "21 - Encontrar los Sims por los que se siente atraido otro Sim" {
+test "1.21 - Encontrar los Sims por los que se siente atraido otro Sim" {
 	var polly = fixture.unSimMujerConPersonalidad(peleadoConLaVida)
 	var ross = fixture.unSimFeliz()
 	var rachel = fixture.unSimFeliz()
@@ -328,7 +328,7 @@ test "21 - Encontrar los Sims por los que se siente atraido otro Sim" {
 	assert.equals([chandler, joey, monica], polly.quienesLeAtraen([ross, rachel, chandler, joey, pheobe, monica]))
 }
 
-test "22 - Contarle una informacion a un Sim" {
+test "1.22 - Contarle una informacion a un Sim" {
 	var chismoso = fixture.unSimHombre()
 	
 	chismoso.agregarConocimiento("tom volvio con summer")
@@ -336,7 +336,7 @@ test "22 - Contarle una informacion a un Sim" {
 	assert.that(chismoso.sabe("tom volvio con summer"))
 }
 
-test "23 - Cuan conocedor es un Sim" {
+test "1.23 - Cuan conocedor es un Sim" {
 	var chismoso = fixture.unSimHombre()
 	
 	chismoso.agregarConocimiento("tom volvio con summer")
@@ -354,7 +354,7 @@ test "24 - Saber si un Sim tiene un conocimiento dado" {
 	assert.that(chismoso.conoce("mari tiene hambre"))
 }
 
-test "25 - Hacer que un Sim se olvide todo" {
+test "1.25 - Hacer que un Sim se olvide todo" {
 	var chismoso = fixture.unSimHombre()
 	
 	chismoso.agregarConocimiento("tom volvio con summer")
@@ -365,7 +365,7 @@ test "25 - Hacer que un Sim se olvide todo" {
 	assert.equals(#{}, chismoso.conocimientos())
 }
 
-test "26 - Un Sim adquiere nuevo estado de animo (soniador)" {
+test "1.26 - Un Sim adquiere nuevo estado de animo (soniador)" {
 	var marvin = fixture.unSimHombre()
 	
 	marvin.agregarConocimiento("mari tiene hambre")
@@ -375,7 +375,7 @@ test "26 - Un Sim adquiere nuevo estado de animo (soniador)" {
 	assert.equals(#{}, marvin.conocimientos())
 }
 
-test "26 - Un Sim adquiere nuevo estado de animo (incomodo)" {
+test "1.26 - Un Sim adquiere nuevo estado de animo (incomodo)" {
 	var marvin = fixture.unSimFeliz()
 	
 	marvin.agregarConocimiento("mari tiene hambre")
@@ -386,7 +386,7 @@ test "26 - Un Sim adquiere nuevo estado de animo (incomodo)" {
 	assert.equals(800, marvin.nivelDeFelicidad())
 }
 
-test "27 - Un Sim cambia de estado de animo y vuelve a la normalidad" {
+test "1.27 - Un Sim cambia de estado de animo y vuelve a la normalidad" {
 	var marvin = fixture.unSimFeliz()
 	
 	marvin.cambioDeAnimo(incomodo)
@@ -395,7 +395,7 @@ test "27 - Un Sim cambia de estado de animo y vuelve a la normalidad" {
 	assert.equals(1000, marvin.nivelDeFelicidad())
 }
 
-test "28 - Un Sim se pone celoso de su pareja" {
+test "1.28 - Un Sim se pone celoso de su pareja" {
 	var otelo = fixture.unSimHombre()
 	var desdemona = fixture.unSimMujer()
 	var yago = fixture.unSimHombre()
@@ -415,7 +415,7 @@ test "28 - Un Sim se pone celoso de su pareja" {
 	assert.equals([yago], otelo.amigos())
 }
 
-test "28 - Un Sim se pone celoso por popularidad" {
+test "1.28 - Un Sim se pone celoso por popularidad" {
 	var otani = fixture.unSimHombre()
 	var suzuki = fixture.unSimHombre()
 	var nakao = fixture.unSimHombre()
@@ -433,7 +433,7 @@ test "28 - Un Sim se pone celoso por popularidad" {
 	assert.equals([nakao], otani.amigos())
 }
 
-test "28 - Un Sim se pone celoso por plata" {
+test "1.28 - Un Sim se pone celoso por plata" {
 	var otelo = fixture.unSimHombre()
 	var yago = fixture.unSimHombre()
 	var casio = fixture.unSimHombre()
@@ -458,7 +458,7 @@ test "28 - Un Sim se pone celoso por plata" {
 	assert.equals([rodrigo], otelo.amigos())
 }
 
-test "29 - Un Sim va a trabajar (copado)" {
+test "1.29 - Un Sim va a trabajar (copado)" {
 	var mimi = fixture.unSimMujer()
 	
 	mimi.nuevoTrabajo(new Copado(10, 100))
@@ -468,7 +468,7 @@ test "29 - Un Sim va a trabajar (copado)" {
 	assert.equals(40, mimi.nivelDeFelicidad())
 }
 
-test "29 - Un Sim va a trabajar (mercenario)" {
+test "1.29 - Un Sim va a trabajar (mercenario)" {
 	var nadia = fixture.unSimMujer()
 	
 	nadia.nuevoTrabajo(new Mercenario())
@@ -478,7 +478,7 @@ test "29 - Un Sim va a trabajar (mercenario)" {
 	assert.equals(100, nadia.dinero())
 }
 
-test "29 - Un Sim va a trabajar (aburrido)" {
+test "1.29 - Un Sim va a trabajar (aburrido)" {
 	var kyanna = fixture.unSimMujer()
 	
 	kyanna.nuevoTrabajo(new Aburrido(10, 100))
@@ -488,7 +488,7 @@ test "29 - Un Sim va a trabajar (aburrido)" {
 	assert.equals(20, kyanna.nivelDeFelicidad())
 }
 
-test "29 - Un sim buenazo va a trabajar (copado)"{
+test "1.29 - Un sim buenazo va a trabajar (copado)"{
 	var kenshin = fixture.unSimFeliz()
 	var kyanna = fixture.unSimMujer()
 	var martin = fixture.unSimHombre()
@@ -505,7 +505,7 @@ test "29 - Un sim buenazo va a trabajar (copado)"{
 	assert.equals(2486, kenshin.nivelDeFelicidad())
 }
 
-test "29 - Un Sim desocupado no gana nada" {
+test "1.29 - Un Sim desocupado no gana nada" {
 	var kenshin = fixture.unSimFeliz()
 	
 	kenshin.trabajar()
@@ -513,14 +513,19 @@ test "29 - Un Sim desocupado no gana nada" {
 	assert.equals(0, kenshin.dinero())
 }
 
-test "2.1 - Cuanto le puede prestar a otro sim" {
+//30 - La repeticion de logica que no pudimos evitar con las
+//herramientas vistas hasta ahora la podemos ver por ejemplo en el
+//ejercicio de abrazos y en el de celos, que al no poder pasar el
+//mensaje por parametro nos obliga a hacer un metodo distinto para cada opcion
+
+test "2.1 - Cuanto le puede prestar a otro Sim" {
 	var leonardo = fixture.unSimHombre()
 	var rafael = fixture.unSimHombre()
 	
 	assert.equals(50, rafael.dispuestoAPrestarA(leonardo))
 }
 
-test "2.2 - Un sim le presta a otro efectivamente" {
+test "2.2 - Un Sim le presta a otro efectivamente" {
 	var vito = fixture.unSimHombre()
 	var michael = fixture.unSimHombre()
 	vito.ganarDinero(100)
@@ -528,7 +533,7 @@ test "2.2 - Un sim le presta a otro efectivamente" {
 	assert.equals(50,michael.dinero())
 }
 
-test "2.2 - Un sim le presta a otro y falla" {
+test "2.2 - Un Sim le presta a otro y falla" {
 	var vito = fixture.unSimHombre()
 	var michael = fixture.unSimHombre()
 	
@@ -536,11 +541,14 @@ test "2.2 - Un sim le presta a otro y falla" {
 	assert.throwsException({vito.prestar(60,michael)})
 }
 
-test "2.11 un vim cumple anos" {
+test "2.11 - Un Vim cumple anios" {
 	var blade = fixture.unVampiro()
-	blade.cumplirAnos()
+	blade.cumplirAnios()
 	assert.equals(18,blade.edad())
 }
 
-
-//30 - La repetici�n de l�gica que no pudimos evitar con las herramientas vistas hasta ahora la podemos ver por ejemplo en el ejercicio de abrazos y en el de celos, que al no poder pasar el mensaje por parametro nos obliga a hacer un metodo distinto para cada opci�n 
+test "2.11 - Un Sim cumple anios" {
+	var wesley = fixture.unSimHombre()
+	wesley.cumplirAnios()
+	assert.equals(46, wesley.edad())
+}

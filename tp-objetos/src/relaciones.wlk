@@ -66,8 +66,6 @@ class Relacion{
 	}
 }
 
-object soltero{
-	
-}
+object soltero{}
 
 object enPareja{}

@@ -74,7 +74,7 @@ class Sim {
     	estadoCivil = unEstadoCivil
     }
     
-    method cumplirAnos(){
+    method cumplirAnios(){
     	edad += 1
     }
     
@@ -158,7 +158,6 @@ class Sim {
 	}
 
 	method nivelDeConocedor() {
-		//a mapear y luego sumar
 		return conocimientos.sum({conocimiento => conocimiento.length()})
 	}
 	
@@ -206,10 +205,11 @@ class Sim {
     
     method prestar(unMonto,unSim) {
     	if (self.lePuedePrestarA(unSim,unMonto)){
-    	dinero -= unMonto
-    	unSim.ganarDinero(unMonto)}
+    		dinero -= unMonto
+    		unSim.ganarDinero(unMonto)
+    	}
     	else{
-    		error.throwWithMessage("No puede prestarle") 
+    		error.throwWithMessage("No puede prestarle.") 
     	}
     }
     
@@ -264,5 +264,5 @@ class Sim {
 class Vim inherits Sim {
 	constructor(unSexo, unaEdad, unaFelicidad, unaPersonalidad, unSexoDePreferencia) = super (unSexo, 18, unaFelicidad, unaPersonalidad, unSexoDePreferencia)
 	
-	override method cumplirAnos(){}
+	override method cumplirAnios(){}
 }
