@@ -159,7 +159,7 @@ class Sim {
     }
     
     method esSecreto(unConocimiento){
-    	return self.conoce(unConocimiento) && amigos.forall({amigo=> amigo.conoce(unConocimiento).negate()})
+    	return self.conoce(unConocimiento) && (amigos.all({amigo=> amigo.conoce(unConocimiento)})).negate()
     }
     
     method desparramarUnChisme(otroSim,unConocimiento){
