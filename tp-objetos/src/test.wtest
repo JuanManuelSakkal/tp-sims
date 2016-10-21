@@ -9,6 +9,10 @@ object fixture {
 		return new Sim("hombre", 45, 10, buenazo, "mujer")
 	}
 	
+	method unVampiro() {
+		return new Vim ("hombre",19,10,buenazo,"mujer")
+	}
+	
 	method unSimMujer() {
 		return new Sim("mujer", 25, 30, interesado, "hombre")
 	}
@@ -530,6 +534,12 @@ test "2.2 - Un sim le presta a otro y falla" {
 	
 	vito.ganarDinero(100)
 	assert.throwsException({vito.prestar(60,michael)})
+}
+
+test "2.11 un vim cumple anos" {
+	var blade = fixture.unVampiro()
+	blade.cumplirAnos()
+	assert.equals(18,blade.edad())
 }
 
 

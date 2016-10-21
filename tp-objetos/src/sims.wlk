@@ -74,6 +74,10 @@ class Sim {
     	estadoCivil = unEstadoCivil
     }
     
+    method cumplirAnos(){
+    	edad += 1
+    }
+    
     method amigos() {
         return amigos
     }
@@ -240,7 +244,6 @@ class Sim {
         celos.accion(self)
     }
     
-	//Nombres de metodos cambiados
     method removerAmigosRicos() {
         amigos.removeAllSuchThat({amigo => amigo.dinero() > dinero})
     }
@@ -256,4 +259,10 @@ class Sim {
     method esAmigoDePareja(unAmigo) {
     	return (self.pareja().amigos()).contains(unAmigo)
     }
+}
+
+class Vim inherits Sim {
+	constructor(unSexo, unaEdad, unaFelicidad, unaPersonalidad, unSexoDePreferencia) = super (unSexo, 18, unaFelicidad, unaPersonalidad, unSexoDePreferencia)
+	
+	override method cumplirAnos(){}
 }
