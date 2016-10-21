@@ -151,6 +151,27 @@ class Sim {
         conocimientos.add(nuevoConocimiento)
     }
     
+    method difundir(unConocimiento) {
+    	conocimientos.add(unConocimiento)
+    	if(self.conoce(unConocimiento)){
+    		amigos.forEach({amigo => amigo.agregarConocimiento(unConocimiento)})
+    	}	
+    }
+    
+    method esSecreto(unConocimiento){
+    	return self.conoce(unConocimiento) && amigos.forall({amigo=> amigo.conoce(unConocimiento).negate()})
+    }
+    
+    method desparramarUnChisme(otroSim,unConocimiento){
+    	if(self.esChisme(otroSim,unConocimiento)){
+    		self.difundir(unConocimiento)
+    	}
+    }
+    
+    method esChisme(otroSim,unConocimiento){
+    	return otroSim.esSecreto(unConocimiento)
+    }
+    
     method conoce(unConocimiento) {
     	return conocimientos.contains(unConocimiento)
     }
