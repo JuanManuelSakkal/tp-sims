@@ -1,3 +1,5 @@
+import objetos.*
+
 class TrabajosQueAfectanLaMoral {
 	var puntosFelicidad
 	var pago
@@ -10,6 +12,7 @@ class TrabajosQueAfectanLaMoral {
 	method trabajar (unSim) {
 		unSim.ganarFelicidad(puntosFelicidad)
 		unSim.ganarDinero(pago)
+		unSim.cambioDeAnimo(normal)
 	}
 }
 
@@ -23,10 +26,20 @@ class Aburrido inherits TrabajosQueAfectanLaMoral {
 	constructor(unosPuntosDeFelicidad, unPago) = super(-unosPuntosDeFelicidad, unPago)
 }
 
+class AburridoHastaLaMuerte inherits TrabajosQueAfectanLaMoral {
+	constructor(unosPuntosDeFelicidad, unPago) = super(-3 * unosPuntosDeFelicidad, unPago)
+}
+
+class MercenarioSocial inherits Mercenario {
+	override method calcularSuma(unSim) {
+		return 100 + 0.02 * unSim.dinero() + unSim.cantidadDeAmigos()
+	}
+}
 
 class Mercenario {
 	method trabajar(unSim) {
 		unSim.ganarDinero(self.calcularSuma(unSim))
+		unSim.cambioDeAnimo(normal)
 	}
 	
 	method calcularSuma(unSim) {

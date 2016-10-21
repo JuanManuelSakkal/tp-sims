@@ -32,7 +32,6 @@ class Sim {
     }
     
     method perderFelicidad(cuantaFelicidad){
-    	
     	nivelDeFelicidad = (nivelDeFelicidad -= cuantaFelicidad).max(0)
     }
     
@@ -62,8 +61,12 @@ class Sim {
     	return unSim.amigos().contains(self)
     }
     
+    method cantidadDeAmigos() {
+    	return amigos.size()
+    }
+    
     method cuatroAmigosMasNuevos() {
-    	return amigos.drop(amigos.size() - 4)
+    	return amigos.drop(self.cantidadDeAmigos() - 4)
     }
     
     method cuatroAmigosMasAntiguos() {
@@ -126,6 +129,10 @@ class Sim {
        estadoDeAnimo.deshacerAccion(self)
        estadoDeAnimo = animoNuevo
        estadoDeAnimo.accion(self)
+    }
+    
+    method estadoDeAnimo() {
+    	return estadoDeAnimo
     }
     
     method leAtrae(unSim) {                      
