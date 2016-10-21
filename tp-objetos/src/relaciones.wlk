@@ -16,6 +16,7 @@ class Relacion{
 	}
 	
 	method ponerEnRelacion(unSim){
+		unSim.puedeTenerRelacion()
 		unSim.nuevaRelacion(self)
 		unSim.amigos().forEach({amigo => circuloDeAmigos.add(amigo)})
 		unSim.nuevoEstadoCivil(enPareja)
@@ -66,6 +67,13 @@ class Relacion{
 	}
 }
 
-object soltero{}
+object soltero{
+	method empezarRelacion(){}
+}
 
-object enPareja{}
+object enPareja{
+	method empezarRelacion(){
+		error.throwWithMessage("Ya esta en pareja") 
+		
+	}
+}

@@ -17,6 +17,10 @@ object fixture {
 		return new Sim("hombre", 45, 1000, buenazo, "mujer")
 	}
 	
+	method unSimMenor() {
+		return new Sim("mujer", 13, 10, buenazo, "mujer")
+	}
+	
 	method unSimMujerConPersonalidad(unaPersonalidad) {
 		return new Sim("mujer", 30, 5, unaPersonalidad, "hombre")
 	}	
@@ -589,6 +593,24 @@ test "2.4 - Un Sim cambia de estado de animo cuando va a trabajar (desocupado)" 
 	assert.equals(incomodo, carmen.estadoDeAnimo())
 }
 
+test "2.5 - Un Sim no puede empezar relacion porque ya esta en pareja" {
+	var nadia = fixture.unSimMujer()
+	var cenicienta = fixture.unSimMujer()
+	var carmen = fixture.unSimMujer()
+	
+	nadia.empezarRelacionCon(cenicienta)
+	
+	
+	assert.throwsException({carmen.empezarRelacionCon(cenicienta)})
+}
+
+test "2.5 - Un Sim no puede empezar relacion porque es menor" {
+	var nadia = fixture.unSimMujer()
+	var cenicienta = fixture.unSimMenor()
+	
+	assert.throwsException({nadia.empezarRelacionCon(cenicienta)})
+}
+
 test "2.11 - Un Vim cumple anios" {
 	var blade = fixture.unVampiro()
 	blade.cumplirAnios()
@@ -600,3 +622,4 @@ test "2.11 - Un Sim cumple anios" {
 	wesley.cumplirAnios()
 	assert.equals(46, wesley.edad())
 }
+

@@ -196,6 +196,13 @@ class Sim {
     	relacionActual = unaRelacion
     }
     
+    method puedeTenerRelacion(){
+    	estadoCivil.empezarRelacion()
+    	if(edad <= 16){
+    		error.throwWithMessage("Es menor")
+    	}
+     }
+    
     method empezarRelacionCon(unSim) {
     	new Relacion().iniciar(self, unSim)
     	self.nuevoCirculoDeAmigos(relacionActual.circuloDeAmigos())
