@@ -725,6 +725,26 @@ test "2.10 - Un sim se informa (de parte de la vieja)"{
 	assert.that(fry.conocimientos().contains("vive en la basura"))
 }
 
+test "2.10 - Un sim se informa (de parte del libro)"{
+	var viejaChusma = fixture.unSimMujer()
+	var tinelli = new Tinelli()
+	var rial = new Rial()
+	var gameOfThrones = new Libro(["ned","jon","arya"])
+	var fry = fixture.unSimHombre()
+	var zoidberg = fixture.unSimHombre()
+	zoidberg.agregarConocimiento("vive en la basura")
+	viejaChusma.hacerseAmigoDe(zoidberg)
+	zoidberg.hacerseAmigoDe(viejaChusma)
+	fry.agregarFuenteDeInformacion(gameOfThrones)
+	fry.agregarFuenteDeInformacion(viejaChusma)
+	fry.agregarFuenteDeInformacion(rial)
+	fry.agregarFuenteDeInformacion(tinelli)
+	
+	fry.seInforma()
+	
+	assert.that(["ned","jon","arya"].any({capitulo => fry.conocimientos().contains(capitulo)}))
+}
+
 test "2.11 - Un Vim cumple anios" {
 	var blade = fixture.unVampiro()
 	blade.cumplirAnios()
