@@ -674,6 +674,7 @@ test "2.10 - Un sim se informa (de parte de tinelli)"{
 	var zoidberg = fixture.unSimHombre()
 	zoidberg.agregarConocimiento("vive en la basura")
 	viejaChusma.hacerseAmigoDe(zoidberg)
+	zoidberg.hacerseAmigoDe(viejaChusma)
 	fry.agregarFuenteDeInformacion(gameOfThrones)
 	fry.agregarFuenteDeInformacion(viejaChusma)
 	fry.agregarFuenteDeInformacion(rial)
@@ -682,6 +683,46 @@ test "2.10 - Un sim se informa (de parte de tinelli)"{
 	fry.seInforma()
 	
 	assert.that(fry.conocimientos().contains("Toto"))
+}
+
+test "2.10 - Un sim se informa (de parte de rial)"{
+	var viejaChusma = fixture.unSimMujer()
+	var tinelli = new Tinelli()
+	var rial = new Rial()
+	var gameOfThrones = new Libro(["ned","jon","arya"])
+	var fry = fixture.unSimHombre()
+	var zoidberg = fixture.unSimHombre()
+	zoidberg.agregarConocimiento("vive en la basura")
+	viejaChusma.hacerseAmigoDe(zoidberg)
+	zoidberg.hacerseAmigoDe(viejaChusma)
+	fry.agregarFuenteDeInformacion(gameOfThrones)
+	fry.agregarFuenteDeInformacion(viejaChusma)
+	fry.agregarFuenteDeInformacion(rial)
+	fry.agregarFuenteDeInformacion(tinelli)
+	
+	fry.seInforma()
+	
+	assert.that(fry.conocimientos().contains("Escandalo"))
+}
+
+test "2.10 - Un sim se informa (de parte de la vieja)"{
+	var viejaChusma = fixture.unSimMujer()
+	var tinelli = new Tinelli()
+	var rial = new Rial()
+	var gameOfThrones = new Libro(["ned","jon","arya"])
+	var fry = fixture.unSimHombre()
+	var zoidberg = fixture.unSimHombre()
+	zoidberg.agregarConocimiento("vive en la basura")
+	viejaChusma.hacerseAmigoDe(zoidberg)
+	zoidberg.hacerseAmigoDe(viejaChusma)
+	fry.agregarFuenteDeInformacion(gameOfThrones)
+	fry.agregarFuenteDeInformacion(viejaChusma)
+	fry.agregarFuenteDeInformacion(rial)
+	fry.agregarFuenteDeInformacion(tinelli)
+	
+	fry.seInforma()
+	
+	assert.that(fry.conocimientos().contains("vive en la basura"))
 }
 
 test "2.11 - Un Vim cumple anios" {

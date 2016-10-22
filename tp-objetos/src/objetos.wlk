@@ -132,13 +132,13 @@ class Libro{
 }
 
 class Tinelli{
-	method bribrindarInformacion(){
+	method brindarInformacion(){
 		return "Toto"
 	}
 }
 
 class Rial{
-	method bribrindarInformacion(){
+	method brindarInformacion(){
 		return "Escandalo"
 	}
 }
