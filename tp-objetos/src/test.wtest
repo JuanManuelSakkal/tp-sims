@@ -649,6 +649,20 @@ test "2.8 - desparramar secretos"{
 	assert.that(aj.conoce("existen los padrinos magicos"))
 }
 
+test "2.9 - Desarrollar fuentes de informacion"{
+	var viejaChusma = fixture.unSimMujer()
+	var tinelli = new Tinelli()
+	var rial = new Rial()
+	var gameOfThrones = new Libro(["ned","jon","arya"])
+	var fry = fixture.unSimHombre()
+	
+	fry.agregarFuenteDeInformacion(gameOfThrones)
+	fry.agregarFuenteDeInformacion(viejaChusma)
+	fry.agregarFuenteDeInformacion(rial)
+	fry.agregarFuenteDeInformacion(tinelli)
+	
+	assert.equals([gameOfThrones,viejaChusma,rial,tinelli],fry.fuentesDeInformacion())
+}
 
 test "2.11 - Un Vim cumple anios" {
 	var blade = fixture.unVampiro()

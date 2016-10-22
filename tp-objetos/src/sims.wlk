@@ -18,6 +18,7 @@ class Sim {
     var conocimientos = #{}
     var relacionActual
     var relaciones = []
+    var fuentesDeInformacion = []
     
     constructor(unSexo, unaEdad, unaFelicidad, unaPersonalidad, unSexoDePreferencia) {
     	sexo = unSexo
@@ -294,6 +295,26 @@ class Sim {
     
     method esAmigoDePareja(unAmigo) {
     	return (self.pareja().amigos()).contains(unAmigo)
+    }
+    
+    method brindarInformacion(){
+    	return conocimientos.filter({conocimiento => conocimiento.esChisme()}).random()
+    }
+    
+    method obtenerInformacionDe(fuenteDeInformacion){
+    	conocimientos.add(fuenteDeInformacion.brindarInformacion())
+    }
+    
+    method agregarFuenteDeInformacion(fuenteDeInformacion){
+    	fuentesDeInformacion.add(fuenteDeInformacion)
+    }
+    
+    method seInforma(){
+    	fuentesDeInformacion.forEach({fdi => self.obtenerInformacionDe(fdi)})
+    }
+    
+    method fuentesDeInformacion(){
+    	return fuentesDeInformacion
     }
 }
 

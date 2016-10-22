@@ -120,6 +120,29 @@ object peleadoConLaVida inherits Personalidad {
     }
 }
 
+class Libro{
+	var capitulos = []
+	constructor(unosCapitulos){
+		capitulos = unosCapitulos
+	}
+	
+	method brindarInformacion(){
+		return capitulos.random()
+	}
+}
+
+class Tinelli{
+	method bribrindarInformacion(){
+		return "Toto"
+	}
+}
+
+class Rial{
+	method bribrindarInformacion(){
+		return "Escandalo"
+	}
+}
+
 
 object buenazo inherits Personalidad {
     method valoracion(siMismo, amigo) {
