@@ -2,7 +2,9 @@ import objetos.*
 import relaciones.*
 import trabajos.*
 import sims.*
-
+import fuentes.*
+import celos.*
+import personalidad.*
 
 object fixture {
 	method unSimHombre() {
@@ -652,8 +654,6 @@ test "2.8 - desparramar secretos"{
 
 test "2.9 - Desarrollar fuentes de informacion"{
 	var viejaChusma = fixture.unSimMujer()
-	var tinelli = new Tinelli()
-	var rial = new Rial()
 	var gameOfThrones = new Libro(["ned","jon","arya"])
 	var fry = fixture.unSimHombre()
 	
@@ -667,8 +667,6 @@ test "2.9 - Desarrollar fuentes de informacion"{
 
 test "2.10 - Un sim se informa (de parte de tinelli)"{
 	var viejaChusma = fixture.unSimMujer()
-	var tinelli = new Tinelli()
-	var rial = new Rial()
 	var gameOfThrones = new Libro(["ned","jon","arya"])
 	var fry = fixture.unSimHombre()
 	var zoidberg = fixture.unSimHombre()
@@ -687,8 +685,6 @@ test "2.10 - Un sim se informa (de parte de tinelli)"{
 
 test "2.10 - Un sim se informa (de parte de rial)"{
 	var viejaChusma = fixture.unSimMujer()
-	var tinelli = new Tinelli()
-	var rial = new Rial()
 	var gameOfThrones = new Libro(["ned","jon","arya"])
 	var fry = fixture.unSimHombre()
 	var zoidberg = fixture.unSimHombre()
@@ -707,8 +703,6 @@ test "2.10 - Un sim se informa (de parte de rial)"{
 
 test "2.10 - Un sim se informa (de parte de la vieja)"{
 	var viejaChusma = fixture.unSimMujer()
-	var tinelli = new Tinelli()
-	var rial = new Rial()
 	var gameOfThrones = new Libro(["ned","jon","arya"])
 	var fry = fixture.unSimHombre()
 	var zoidberg = fixture.unSimHombre()
@@ -723,6 +717,24 @@ test "2.10 - Un sim se informa (de parte de la vieja)"{
 	fry.seInforma()
 	
 	assert.that(fry.conocimientos().contains("vive en la basura"))
+}
+
+test "2.10 - Un sim se informa (de parte del libro)"{
+	var viejaChusma = fixture.unSimMujer()
+	var gameOfThrones = new Libro(["ned","jon","arya"])
+	var fry = fixture.unSimHombre()
+	var zoidberg = fixture.unSimHombre()
+	zoidberg.agregarConocimiento("vive en la basura")
+	viejaChusma.hacerseAmigoDe(zoidberg)
+	zoidberg.hacerseAmigoDe(viejaChusma)
+	fry.agregarFuenteDeInformacion(gameOfThrones)
+	fry.agregarFuenteDeInformacion(viejaChusma)
+	fry.agregarFuenteDeInformacion(rial)
+	fry.agregarFuenteDeInformacion(tinelli)
+	
+	fry.seInforma()
+	
+	assert.that(fry.conocimientos().any({conocimiento => gameOfThrones.capitulos().contains(conocimiento)}))
 }
 
 test "2.11 - Un Vim cumple anios" {
