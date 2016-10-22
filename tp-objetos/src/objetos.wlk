@@ -127,7 +127,7 @@ class Libro{
 	}
 	
 	method brindarInformacion(){
-		return capitulos.random()
+		return capitulos.anyOne()
 	}
 }
 

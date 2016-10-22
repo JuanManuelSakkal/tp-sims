@@ -164,14 +164,14 @@ class Sim {
     	return self.conoce(unConocimiento) && (amigos.all({amigo=> amigo.conoce(unConocimiento)})).negate()
     }
     
-    method desparramarUnChisme(otroSim,unConocimiento){
-    	if(self.esChisme(otroSim,unConocimiento)){
+    method desparramarUnChisme(unConocimiento){
+    	if(self.esChisme(unConocimiento)){
     		self.difundir(unConocimiento)
     	}
     }
     
-    method esChisme(otroSim,unConocimiento){
-    	return otroSim.esSecreto(unConocimiento)
+    method esChisme(unConocimiento){
+    	return amigos.any({amigo => amigo.esSecreto(unConocimiento)})
     }
     
     method conoce(unConocimiento) {
@@ -298,7 +298,7 @@ class Sim {
     }
     
     method brindarInformacion(){
-    	return conocimientos.filter({conocimiento => conocimiento.esChisme()}).random()
+    	return amigos.anyOne().conocimientos().find({conocimiento => self.esChisme(conocimiento)})
     }
     
     method obtenerInformacionDe(fuenteDeInformacion){
