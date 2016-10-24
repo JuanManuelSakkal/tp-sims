@@ -750,3 +750,5 @@ test "2.11 - Un Sim cumple anios" {
 	assert.equals(46, wesley.edad())
 }
 
+//2.12 Se podría agregar un atributo "tipo" a los sims, en el que se pueda almacenar un objeto vampiro o humano, al cual se le enviaria el mensaje cumplir años cuando se quiera que el sim cumpla años,
+//humano tendria un metodo que le aumente un año al sim, y vampiro uno que no haga nada, asi serian polimorficos, ademas de agregar un metodo a los vims para que puedan morder a un sim y a este le cambie el tipo.
